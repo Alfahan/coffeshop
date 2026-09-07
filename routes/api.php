@@ -27,6 +27,18 @@ Route::prefix("dashboard")
             App\Http\Controllers\Api\Dashboard\LoginController::class,
             "logout",
         ]);
+        Route::get("/count", [
+            App\Http\Controllers\Api\Dashboard\DashboardController::class,
+            "index",
+        ]);
+        Route::get("/post", [
+            App\Http\Controllers\Api\Dashboard\DashboardController::class,
+            "singlePost",
+        ]);
+        Route::get("/product", [
+            App\Http\Controllers\Api\Dashboard\DashboardController::class,
+            "singleProduct",
+        ]);
     });
 
 Route::prefix("mobile")
