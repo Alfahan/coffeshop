@@ -14,11 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post("/login", [App\Http\Controllers\Api\Dashboard\LoginController::class, "index"]);
-Route::post("/payment-notif", [
-    App\Http\Controllers\Api\Dashboard\MidtransController::class,
-    "callback",
-]);
 Route::prefix("dashboard")
     ->middleware(["auth:api", "admin"])
     ->group(function () {
@@ -43,15 +38,19 @@ Route::prefix("dashboard")
             App\Http\Controllers\Api\Dashboard\DashboardController::class,
             "singleProduct",
         ]);
+        Route::get("transactions/{id}/status/{status}", [
+            App\Http\Controllers\Api\Dashboard\TransactionController::class,
+            "changeStatus",
+        ]);
         Route::apiResource(
             "/categories",
             App\Http\Controllers\Api\Dashboard\CategoryController::class,
         );
+        Route::apiResource("/posts", App\Http\Controllers\Api\Dashboard\PostController::class);
         Route::apiResource(
             "/products",
             App\Http\Controllers\Api\Dashboard\ProductController::class,
         );
-        Route::apiResource("/posts", App\Http\Controllers\Api\Dashboard\PostController::class);
         Route::apiResource(
             "/transactions",
             App\Http\Controllers\Api\Dashboard\TransactionController::class,
@@ -63,6 +62,19 @@ Route::prefix("dashboard")
         );
     });
 
+Route::post("/login", [App\Http\Controllers\Api\Dashboard\LoginController::class, "index"]);
+Route::post("/register", [App\Http\Controllers\Api\Mobile\UserController::class, "store"]);
+Route::post("/payment-notif", [
+    App\Http\Controllers\Api\Dashboard\MidtransController::class,
+    "callback",
+]);
 Route::prefix("mobile")
     ->middleware(["auth:api", "user"])
-    ->group(function () {});
+    ->group(function () {
+        Route::get("/user", [App\Http\Controllers\Api\Mobile\UserController::class, "getUser"]);
+        Route::get("/user/{id}", [App\Http\Controllers\Api\Mobile\UserController::class, "show"]);
+        Route::post("/checkout", [
+            App\Http\Controllers\Api\Mobile\UserController::class,
+            "checkout",
+        ]);
+    });
