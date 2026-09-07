@@ -14,9 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post("/login", [App\Http\Controllers\Api\Dashboard\LoginController::class, "index"]);
 Route::prefix("dashboard")
     ->middleware(["auth:api", "admin"])
-    ->group(function () {});
+    ->group(function () {
+        Route::get("/user", [App\Http\Controllers\Api\Dashboard\LoginController::class, "getUser"]);
+        Route::get("/refresh", [
+            App\Http\Controllers\Api\Dashboard\LoginController::class,
+            "refreshToken",
+        ]);
+        Route::post("/logout", [
+            App\Http\Controllers\Api\Dashboard\LoginController::class,
+            "logout",
+        ]);
+    });
 
 Route::prefix("mobile")
     ->middleware(["auth:api", "user"])
