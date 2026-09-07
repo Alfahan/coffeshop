@@ -47,6 +47,7 @@ Route::prefix("dashboard")
             "/products",
             App\Http\Controllers\Api\Dashboard\ProductController::class,
         );
+        Route::apiResource("/posts", App\Http\Controllers\Api\Dashboard\PostController::class);
     });
 
 Route::prefix("mobile")
