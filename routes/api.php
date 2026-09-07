@@ -52,6 +52,7 @@ Route::prefix("dashboard")
             "/transactions",
             App\Http\Controllers\Api\Dashboard\TransactionController::class,
         );
+        Route::apiResource("/users", App\Http\Controllers\Api\Dashboard\UserController::class);
     });
 
 Route::prefix("mobile")
