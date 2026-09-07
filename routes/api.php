@@ -109,8 +109,12 @@ Route::prefix("mobile")
             "storeComment",
         ]);
         Route::get("/product", [App\Http\Controllers\Api\Mobile\ProductController::class, "all"]);
-        Route::get("/product/{slug}", [
+        Route::get("/product/{id}", [
             App\Http\Controllers\Api\Mobile\ProductController::class,
             "show",
+        ]);
+        Route::get("/comments", [
+            App\Http\Controllers\Api\Mobile\CommentController::class,
+            "index",
         ]);
     });
