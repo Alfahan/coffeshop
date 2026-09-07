@@ -68,6 +68,7 @@ Route::post("/payment-notif", [
     App\Http\Controllers\Api\Dashboard\MidtransController::class,
     "callback",
 ]);
+
 Route::prefix("mobile")
     ->middleware(["auth:api", "user"])
     ->group(function () {
@@ -76,5 +77,25 @@ Route::prefix("mobile")
         Route::post("/checkout", [
             App\Http\Controllers\Api\Mobile\UserController::class,
             "checkout",
+        ]);
+        Route::get("/categories", [
+            App\Http\Controllers\Api\Mobile\CategoryController::class,
+            "index",
+        ]);
+        Route::get("/allcategories", [
+            App\Http\Controllers\Api\Mobile\CategoryController::class,
+            "all",
+        ]);
+        Route::get("/categoriesSecond", [
+            App\Http\Controllers\Api\Mobile\CategoryController::class,
+            "indexSecond",
+        ]);
+        Route::get("/category/{slug}", [
+            App\Http\Controllers\Api\Mobile\CategoryController::class,
+            "show",
+        ]);
+        Route::get("/categoryproduct/{slug}", [
+            App\Http\Controllers\Api\Mobile\CategoryController::class,
+            "showProduct",
         ]);
     });
