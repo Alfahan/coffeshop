@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post("/login", [App\Http\Controllers\Api\Dashboard\LoginController::class, "index"]);
+Route::post("/payment-notif", [
+    App\Http\Controllers\Api\Dashboard\MidtransController::class,
+    "callback",
+]);
 Route::prefix("dashboard")
     ->middleware(["auth:api", "admin"])
     ->group(function () {
