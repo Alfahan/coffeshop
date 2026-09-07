@@ -86,7 +86,7 @@ Route::prefix("mobile")
             App\Http\Controllers\Api\Mobile\CategoryController::class,
             "all",
         ]);
-        Route::get("/categoriesSecond", [
+        Route::get("/categoriessecond", [
             App\Http\Controllers\Api\Mobile\CategoryController::class,
             "indexSecond",
         ]);
@@ -97,5 +97,20 @@ Route::prefix("mobile")
         Route::get("/categoryproduct/{slug}", [
             App\Http\Controllers\Api\Mobile\CategoryController::class,
             "showProduct",
+        ]);
+        Route::get("/post", [App\Http\Controllers\Api\Mobile\PostController::class, "index"]);
+        Route::get("/singlepost", [
+            App\Http\Controllers\Api\Mobile\PostController::class,
+            "singlePost",
+        ]);
+        Route::get("/post/{slug}", [App\Http\Controllers\Api\Mobile\PostController::class, "show"]);
+        Route::post("/comment", [
+            App\Http\Controllers\Api\Mobile\PostController::class,
+            "storeComment",
+        ]);
+        Route::get("/product", [App\Http\Controllers\Api\Mobile\ProductController::class, "all"]);
+        Route::get("/product/{slug}", [
+            App\Http\Controllers\Api\Mobile\ProductController::class,
+            "show",
         ]);
     });
