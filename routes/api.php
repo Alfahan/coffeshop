@@ -39,6 +39,10 @@ Route::prefix("dashboard")
             App\Http\Controllers\Api\Dashboard\DashboardController::class,
             "singleProduct",
         ]);
+        Route::apiResource(
+            "/categories",
+            App\Http\Controllers\Api\Dashboard\CategoryController::class,
+        );
     });
 
 Route::prefix("mobile")
