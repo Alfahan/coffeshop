@@ -53,6 +53,10 @@ Route::prefix("dashboard")
             App\Http\Controllers\Api\Dashboard\TransactionController::class,
         );
         Route::apiResource("/users", App\Http\Controllers\Api\Dashboard\UserController::class);
+        Route::apiResource(
+            "/comments",
+            App\Http\Controllers\Api\Dashboard\CommentController::class,
+        );
     });
 
 Route::prefix("mobile")
